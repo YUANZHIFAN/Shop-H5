@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>商城</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+	<template>
+		<div class="main" id="main">
+			<div class="show-1ist" v-for="item in data">
+				<div class="box-img" v-bind:style="background-image:'url('+item.img+')';"></div>
+				<div class="box-block">
+					<ul class="block">
+						<li>
+							<span class="name">{{item.name}}</span>
+							<span class="right">{{item.num}}</span>
+							<span class="right">X</span>
+						</li>
+						<li>
+							<span>{{item.color}}</span>
+							<span>{{item.size}}</span>
+							<span class="right">{{item.discount}}</span>
+							<span class="right">折扣:</span>
+						</li>
+						<li>
+							<span>￥</span>
+							<span>{{item.price}}</span>
+							<span class="right">{{item.price}}</span>
+							<span class="right">￥</span>
+							<span class="right">结算价:</span>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="show-2">
+				<ul>
+					<li>
+						<span class="left">购买数量</span>
+						<span class="right">2</span>
+					</li>
+					<li>
+						<span class="left">商品原价</span>
+						<span class="right">1778</span>
+						<span class="right">￥</span>
+					</li>
+					<li>
+						<span class="left">优惠金额</span>
+						<span class="right">0.0</span>
+						<span class="right">￥</span>
+					</li>
+					<li>
+						<span class="left">结算金额</span>
+						<span class="right">1778</span>
+						<span class="right">￥</span>
+					</li>
+					<li class="last">
+						<span class="left sumMoney">支付金额</span>
+						<span class="right sumMoney">1778</span>
+						<span class="right sumMoney">￥</span>
+					</li>
+				</ul>
+			</div>
+			<div class="show-3">
+				<div class="content">
+					<div class="text">
+						<span>杨欣会</span>
+						<span style="margin-left: 8px;">17607902616</span>
+					</div>
+					<div class="address">广东省广州市天河区科韵路</div>
+				</div>
+				<div class="btn">></div>
+			</div>
+			<div class="button">支付</div>
+		</div>
+	</template>
+
+	<script type="text/javascript">
+		window.addEventListener('load', function () {
+			var vm = new Vue({
+				el: '#main',
+				data: {
+					datas: []
+				},
+				mounted() {
+					this.getData()
+				},
+				methods: {
+					getData() {
+						var self = this
+						axios.get('data.json')
+							.then(function (res) {
+								console.log(res)
+								self.datas = res.data.stylelist
+							})
+					}
+				}
+			})
+		})
+	</script>
+</body>
+
+</html>
